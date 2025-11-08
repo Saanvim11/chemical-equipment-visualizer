@@ -2,19 +2,36 @@ import os
 from pathlib import Path
 from datetime import timedelta
 
-STATIC_URL = '/static/'
+# -------------------------------------------------------
+#  BASE SETTINGS
+# -------------------------------------------------------
+BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-this-in-production')
+
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+
+# Allow Render + localhost
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    os.environ.get('RENDER_EXTERNAL_HOSTNAME'),
+]
+ALLOWED_HOSTS = [h for h in ALLOWED_HOSTS if h]  # remove any None
+
+# -------------------------------------------------------
+#  STATIC & MEDIA FILES
+# -------------------------------------------------------
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'backend', 'static')]
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-SECRET_KEY = 'django-insecure-change-this-in-production'
-
-DEBUG = True
-
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-
+# -------------------------------------------------------
+#  APPLICATIONS
+# -------------------------------------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,6 +47,9 @@ INSTALLED_APPS = [
     'equipment',
 ]
 
+# -------------------------------------------------------
+#  MIDDLEWARE
+# -------------------------------------------------------
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -41,26 +61,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# -------------------------------------------------------
+#  URL & WSGI
+# -------------------------------------------------------
 ROOT_URLCONF = 'backend.urls'
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# -------------------------------------------------------
+#  DATABASE
+# -------------------------------------------------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -68,6 +77,9 @@ DATABASES = {
     }
 }
 
+# -------------------------------------------------------
+#  PASSWORD VALIDATION
+# -------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -75,17 +87,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# -------------------------------------------------------
+#  INTERNATIONALIZATION
+# -------------------------------------------------------
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+# -------------------------------------------------------
+#  DJANGO REST FRAMEWORK
+# -------------------------------------------------------
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -100,12 +112,16 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
+# -------------------------------------------------------
+#  CORS SETTINGS
+# -------------------------------------------------------
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://localhost:5173",   # ADD THIS
+    "http://localhost:5173",
     "http://127.0.0.1:5173"
 ]
 CORS_ALLOW_CREDENTIALS = True
-
 CORS_ALLOW_ALL_ORIGINS = True
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
