@@ -1,37 +1,37 @@
-# 📊 Vizly – Interactive CSV Analyzer (Web + Desktop)
+#  Vizly – Interactive CSV Analyzer (Web + Desktop)
 
 **Vizly** is a hybrid **Web + Desktop application** for uploading, analyzing, and visualizing CSV datasets interactively.  
 It enables users to upload tabular data, explore key statistics, and visualize insights through clean, dynamic charts — accessible via both browser and desktop interfaces.
 
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 
 Vizly demonstrates seamless integration between:
-- 🖥️ A **React (Vite)** web frontend  
-- 🧩 A **Django + Django REST Framework** backend API  
-- 💻 A **PyQt5 desktop application**
+-  A **React (Vite)** web frontend  
+-  A **Django + Django REST Framework** backend API  
+-  A **PyQt5 desktop application**
 
 Users can upload CSV files, view computed analytics (mean, min, max, distributions), and visualize trends via interactive charts.  
 The backend provides a unified API used by both the web and desktop versions.
 
 ---
 
-## ✨ Features
+##  Features
 
-- 📤 **CSV Upload:** Upload datasets from web or desktop interface  
-- 📊 **Data Summary:** Compute totals, averages, and column statistics via Django + Pandas  
-- 📈 **Visualizations:** 
+-  **CSV Upload:** Upload datasets from web or desktop interface  
+-  **Data Summary:** Compute totals, averages, and column statistics via Django + Pandas  
+-  **Visualizations:** 
   - Chart.js for web  
   - Matplotlib for desktop  
-- 🕒 **History Management:** Store last 5 uploaded datasets in SQLite  
-- 🧾 **PDF Export:** Generate and download summary reports  
-- 🔐 **Authentication (optional):** Basic user access control  
-- 💾 **Sample Data:** Includes `sample_equipment_data.csv` for quick testing  
+-  **History Management:** Store last 5 uploaded datasets in SQLite  
+-  **PDF Export:** Generate and download summary reports  
+-  **Authentication (optional):** Basic user access control  
+-  **Sample Data:** Includes `sample_equipment_data.csv` for quick testing  
 
 ---
 
-## 🧱 Tech Stack
+##  Tech Stack
 
 | Layer | Technology | Purpose |
 |-------|-------------|----------|
@@ -44,9 +44,9 @@ The backend provides a unified API used by both the web and desktop versions.
 
 ---
 
-## ⚙️ Setup Instructions
+##  Setup Instructions
 
-### 🔹 1. Clone the Repository
+###  1. Clone the Repository
 
 ```bash
 git clone https://github.com/Saanvim11/vizly.git
@@ -78,4 +78,4 @@ npm run dev
 ### Frontend runs at
 http://localhost:5173/
 
-### 
+## Deploed the full app at - 
